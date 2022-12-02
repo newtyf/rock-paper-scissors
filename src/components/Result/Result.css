@@ -1,0 +1,25 @@
+.Result p {
+  font-size: 60px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.Result button {
+  background-color: white;
+  border: none;
+  color: var(--Dark-Text);
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 3px;
+
+  transition: 300ms;
+}
+
+.Result button:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}

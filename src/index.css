@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* primary */
+  --scissors-gradient: hsl(39, 89%, 49%);
+  --paper-gradient: hsl(230, 89%, 62%);
+  --rock-gradient: hsl(349, 71%, 52%);
+  --lizard-gradient: hsl(261, 73%, 60%);
+  --cyan: hsl(189, 59%, 53%);
+
+  /* neutral */
+  --Dark-Text: hsl(229, 25%, 31%);
+  --Score-Text: hsl(229, 64%, 46%);
+  --Header-Outline: hsl(217, 16%, 45%);
+
+  /* background */
+  --Radial-Gradient: radial-gradient(hsl(214, 47%, 23%), hsl(238, 48%, 15%));
+
+  /* fonts */
+  --Barlow-Semi: 'Barlow Semi Condensed', sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: var(--Barlow-Semi);
+  background: var(--Radial-Gradient);
+}

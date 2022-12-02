@@ -1,0 +1,24 @@
+.Score {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: var(--Score-Text);
+  min-height: 70px;
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.Score p {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--Dark-Text);
+  padding-top: 5px;
+}
+
+.Score span {
+  margin-top: -3px;
+  color: var(--Score-Text);
+  font-size: 14px;
+}

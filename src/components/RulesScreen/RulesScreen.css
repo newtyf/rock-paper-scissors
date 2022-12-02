@@ -1,0 +1,60 @@
+.RulesScreen {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  top: 100vh;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.967);
+  transition: 400ms ease-in-out;
+}
+
+.RulesScreen.show {
+  top: 0;
+}
+
+.RulesScreen h1 {
+  color: var(--Dark-Text);
+}
+
+.RulesScreen img {
+  object-fit: contain;
+  width: 70%;
+  height: 70%;
+}
+
+.RulesScreen .close-rules {
+  all: unset;
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transition: 200ms ease-in-out;
+  border-radius: 50%;
+}
+
+.RulesScreen .close-rules img {
+  width: 100%;
+  height: 100%;
+}
+
+.RulesScreen .close-rules:hover {
+  transform: rotate(360deg);
+}
+
+@media (min-width: 800px) {
+  .RulesScreen h1 {
+    margin-bottom: 100px;
+  }
+  .RulesScreen img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .RulesScreen .close-rules {
+    margin-top: 100px;
+  }
+}

@@ -1,0 +1,16 @@
+.RulesButton {
+  all: unset;
+  border: 1px solid var(--Header-Outline);
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  transition: 200ms;
+  cursor: pointer;
+}
+
+.RulesButton:hover {
+  background-color: white;
+  color: var(--Dark-Text);
+}
