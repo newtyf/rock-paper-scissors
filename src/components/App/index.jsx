@@ -99,6 +99,7 @@ function App() {
               key={option.id}
               imageGameOption={option.img}
               colorGameOption={option.color}
+              animateStyle={true}
               onClick={() => handleClick(option)}
             />
           ))}
@@ -109,6 +110,7 @@ function App() {
             <div className="picked">
               <GameSelection
                 shadowStyle={true}
+                animateStyle={true}
                 colorGameOption={playerState.pick.color}
                 imageGameOption={playerState.pick.img}
               />

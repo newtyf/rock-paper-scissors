@@ -92,8 +92,8 @@
 
 @media (min-width: 800px) {
   .Game {
-    grid-template-columns: repeat(2, minmax(150px, 300px));
-    grid-template-rows: repeat(2, minmax(150px, 300px));
+    grid-template-columns: repeat(2, minmax(150px, 250px));
+    grid-template-rows: repeat(2, minmax(150px, 220px));
   }
 
   .GameSelection {

@@ -11,9 +11,9 @@
   border-radius: 10px;
   height: 40px;
   width: 100%;
-  font-weight: 700;
+  font-weight: bold;
   cursor: pointer;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 
   transition: 300ms;
 }

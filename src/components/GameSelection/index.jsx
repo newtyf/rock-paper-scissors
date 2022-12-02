@@ -2,6 +2,7 @@ import "./GameSelection.css";
 
 function GameSelection({
   shadowStyle,
+  animateStyle,
   imageGameOption,
   colorGameOption,
   onClick,
@@ -14,7 +15,7 @@ function GameSelection({
   return (
     <button
       onClick={onClick}
-      className={`GameSelection ${shadowStyle ? "shadowSelect" : ""}`}
+      className={`GameSelection ${shadowStyle ? "shadowSelect" : ""} ${animateStyle ? "animate" : ""}`}
       style={styleSelection}
     ></button>
   );
