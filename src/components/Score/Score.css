@@ -5,6 +5,7 @@
   color: var(--Score-Text);
   min-height: 70px;
   width: 30%;
+  max-width: 130px;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
