@@ -1,7 +1,7 @@
 <h1 align="center">Rock - Paper - Scissors</h1>
 <h6 align="center">Multiplayer game</h6>
 
-<div align="center"><img src="public/readme-image.png" alt="game-image" width="400" /></div>
+<div align="center"><img src="https://user-images.githubusercontent.com/87625663/236930120-d7f0d498-2c3e-4aef-b201-0f9b891151c0.png" alt="game-image" width="150" /></div>
 
 <p align="center">Live Site <a href="https://rps.newtyf.com/">Here</a>.</p>
 
