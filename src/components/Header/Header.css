@@ -1,0 +1,38 @@
+.Header {
+  display: flex;
+  width: 80%;
+  padding: 20px 30px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--Header-Outline);
+  border-radius: 5px;
+  font-size: 1.4em;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.Header__score {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: var(--Score-Text);
+  min-height: 70px;
+  width: 30%;
+  max-width: 130px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.Header__score p {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--Dark-Text);
+  padding-top: 5px;
+}
+
+.Header__score span {
+  margin-top: -3px;
+  color: var(--Score-Text);
+  font-size: 14px;
+}

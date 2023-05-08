@@ -1,0 +1,59 @@
+.GameSelection {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 15px solid;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40px;
+  box-shadow: 0px 3px 10px #6a6a6ae7 inset;
+  cursor: pointer;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+.GameSelection.animate {
+  animation: rotateOptions 2s infinite linear;
+}
+
+.GameSelection:hover {
+  box-shadow: 0px 0px 0px 70px rgba(201, 201, 201, 0.042),
+    0px 0px 0px 50px rgba(201, 201, 201, 0.192),
+    0px 0px 0px 30px rgba(255, 255, 255, 0.079);
+  animation: shadows 700ms ease-out;
+}
+
+.GameSelection.shadowSelect {
+  box-shadow: 0px 0px 0px 70px rgba(201, 201, 201, 0.042),
+    0px 0px 0px 50px rgba(201, 201, 201, 0.192),
+    0px 0px 0px 30px rgba(255, 255, 255, 0.079);
+}
+
+@keyframes shadows {
+  0% {
+    box-shadow: none;
+  }
+  25% {
+    box-shadow: 0px 0px 0px 70px rgba(201, 201, 201, 0.042);
+  }
+  75% {
+    box-shadow: 0px 0px 0px 70px rgba(201, 201, 201, 0.042),
+      0px 0px 0px 50px rgba(201, 201, 201, 0.192);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 70px rgba(201, 201, 201, 0.042),
+      0px 0px 0px 50px rgba(201, 201, 201, 0.192),
+      0px 0px 0px 30px rgba(255, 255, 255, 0.079);
+  }
+}
+
+@keyframes rotateOptions {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,41 @@
+.GameResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 400px;
+  padding: 20px 0;
+}
+
+.GameResult .pickers {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  padding-top: 30px;
+  animation: fadeIn 500ms;
+}
+
+.pickers .picked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+}
+
+.picked p {
+  margin-bottom: -50px;
+  margin-top: 20px;
+}
+
+.Result p {
+  font-size: 60px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 800px) {
+  .GameResult {
+    min-height: 440px;
+  }
+}
