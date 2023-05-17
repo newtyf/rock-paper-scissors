@@ -1,7 +1,7 @@
 import { UseHome } from "../hooks/UseHome";
 
 export const Home = () => {
-  const { handleFormUser, handleFormRoom, playWithPc } = UseHome();
+  const { handleFormUser, handleFormRoom, playWithPc, createRoom, joinRoom } = UseHome();
 
   return (
     <div className='Home'>
@@ -30,7 +30,7 @@ export const Home = () => {
           placeholder='Ingrese el id de la sala'
         />
         <button
-          // onClick={createRoom}
+          onClick={createRoom}
           className='btn-black'
           style={{ width: "140px", marginRight: "15px" }}
           type='submit'
@@ -38,7 +38,7 @@ export const Home = () => {
           CREATE ROOM
         </button>
         <button
-          // onClick={joinRoom}
+          onClick={joinRoom}
           className='btn-black'
           style={{ width: "140px", marginLeft: "5px" }}
           type='submit'

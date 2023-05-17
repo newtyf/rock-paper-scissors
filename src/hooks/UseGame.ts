@@ -7,10 +7,11 @@ import { wait } from "../helpers/wait";
 
 import { AppContext } from "../types/AppContext";
 import { TPick, User, Room } from "../types/";
+import { IGAME } from "../types/IGame";
 
 const gameOptions: TPick[] = ["ROCK", "PAPER", "SCISSOR"];
 
-export const UseGame = () => {
+export const UseGame = (): IGAME => {
   //* navigate
   const navigate = useNavigate();
 
@@ -72,7 +73,6 @@ export const UseGame = () => {
   }, [user.pick]);
 
   return {
-    user,
     pickGameSelection,
     playAgain,
     exitGame,

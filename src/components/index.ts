@@ -4,3 +4,4 @@ export * from "./LabelModal";
 export * from "./GameResult";
 export * from "./LoaderGameResult";
 export * from "./RulesModal";
+export * from "./MenuModal";

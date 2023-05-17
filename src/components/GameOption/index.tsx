@@ -12,7 +12,7 @@ function GameOption(props: {
 
   const styleSelection = {
     backgroundImage: `url(${options[option as keyof typeof options].img})`,
-    borderColor: `var(${options[option as keyof typeof options].color})`,
+    borderColor: options[option as keyof typeof options].color,
   };
 
   return (

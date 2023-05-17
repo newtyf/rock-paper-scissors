@@ -3,8 +3,8 @@ import { options } from "../../helpers";
 import { TPick } from "../../types";
 
 export const LoaderGameResult = () => {
-  const [img, setimg] = useState(`url(${options.ROCK.img})`);
-  const [color, setcolor] = useState(`var(${options.ROCK.color})`);
+  const [img, setimg] = useState<string>(`url(${options.ROCK.img})`);
+  const [color, setcolor] = useState<string>(options.ROCK.color);
 
   useEffect(() => {
     let i = 0;
@@ -14,9 +14,7 @@ export const LoaderGameResult = () => {
         i = 0;
       }
       setimg(`url(${options[picksAvailable[i] as keyof typeof options].img}`);
-      setcolor(
-        `var(${options[picksAvailable[i] as keyof typeof options].color})`
-      );
+      setcolor(options[picksAvailable[i] as keyof typeof options].color);
       i++;
     }, 200);
     return () => {

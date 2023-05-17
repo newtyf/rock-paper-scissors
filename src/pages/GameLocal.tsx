@@ -1,17 +1,18 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { Header, GameOption, GameResult } from "../components";
 import { UseGame } from "../hooks/UseGame";
 
 import { AppContext } from "../types/AppContext";
 import { UserContext } from "../context/UserContext";
-import { Header, GameOption, GameResult } from "../components";
 import { UseRuleModal } from "../utils/UseRuleModal";
 
 export const GameLocal = () => {
   const { user, enemy, room } = useContext(UserContext) as AppContext;
-  const { pickGameSelection, exitGame, playAgain } = UseGame();
   const { handleOpenRules } = UseRuleModal();
+
+  const { pickGameSelection, exitGame, playAgain } = UseGame();
 
   return (
     <div className='App'>

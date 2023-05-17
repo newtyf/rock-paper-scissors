@@ -1,4 +1,4 @@
-import { LabelModal, RulesModal } from "./components/";
+import { LabelModal, MenuModal, RulesModal } from "./components/";
 import { UserProvider } from "./context/UserProvider";
 import { AppRouter } from "./router/AppRouter";
 import "./styles.css";
@@ -8,7 +8,10 @@ function RockPaperScissors() {
     <>
       <LabelModal />
       <UserProvider>
-        <AppRouter />
+        <>
+          <MenuModal />
+          <AppRouter />
+        </>
       </UserProvider>
       <RulesModal />
     </>

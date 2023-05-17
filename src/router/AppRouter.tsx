@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home } from "../pages/Home";
-import { GameLocal } from "../pages/GameLocal";
+import { GameLocal, GameOnline, Home } from "../pages";
 
 export const AppRouter = () => {
   return (
@@ -8,6 +7,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path='/*' element={<Home />}></Route>
         <Route path='/local/*' element={<GameLocal />}></Route>
+        <Route path='/online/*' element={<GameOnline />}></Route>
       </Routes>
     </>
   );

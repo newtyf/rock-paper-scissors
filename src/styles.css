@@ -6,11 +6,11 @@
 
 :root {
   /* primary */
-  --scissors-gradient: hsl(39, 89%, 49%);
-  --paper-gradient: hsl(230, 89%, 62%);
-  --rock-gradient: hsl(349, 71%, 52%);
-  --lizard-gradient: hsl(261, 73%, 60%);
-  --cyan: hsl(189, 59%, 53%);
+  --scissors-gradient: #ec9e0e;
+  --paper-gradient: #4865f4;
+  --rock-gradient: #dc2e4e;
+  --lizard-gradient: #834fe3;
+  --cyan: #40b9ce;
 
   /* neutral */
   --Dark-Text: hsl(229, 25%, 31%);

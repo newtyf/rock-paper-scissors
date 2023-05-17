@@ -1,20 +1,18 @@
-import { User } from "./User";
-
 interface IRoom {
-  id: string | null;
-  users: User[];
+  _id: string | null;
+  users: string[];
   state: "WAIT" | "START" | "END";
   winner: string | null;
 }
 
 export class Room implements IRoom {
-  id: string | null;
-  users: User[];
+  _id: string | null;
+  users: string[];
   state: "WAIT" | "START" | "END";
   winner: string | null;
 
-  constructor(room: IRoom = { id: null, state: "WAIT", users: [], winner: null }) {
-    this.id = room.id;
+  constructor(room: IRoom = { _id: null, state: "WAIT", users: [], winner: null }) {
+    this._id = room._id;
     this.users = room.users;
     this.state = room.state;
     this.winner = room.winner;

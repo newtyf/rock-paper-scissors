@@ -2,24 +2,29 @@ import { useState, useEffect } from "react";
 import { User } from "../types/User";
 import { Room } from "../types/Room";
 import { UserContext } from "./UserContext";
+import axios from "axios";
 
 const initialUserState = (): User => {
   const user = localStorage.getItem("user");
-  return user
-    ? JSON.parse(user)
-    : new User();
+  return user ? JSON.parse(user) : new User();
 };
 const initalEnemyState = (): User => {
   const enemy = localStorage.getItem("enemy");
-  return enemy
-    ? JSON.parse(enemy)
-    : new User();
+  return enemy ? JSON.parse(enemy) : new User();
 };
 const initialRoomState = (): Room => {
   const room = localStorage.getItem("room");
   return room
     ? JSON.parse(room)
-    : new Room({ id: null, state: "WAIT", users: [], winner: null });
+    : new Room({ _id: null, state: "WAIT", users: [], winner: null });
+};
+
+const updateUser = async (user: User) => {
+  await axios.put(`${import.meta.env.VITE_HOST_API}/users/${user._id}`, {
+    pick: user.pick,
+    points: user.points,
+    name: user.name,
+  });
 };
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -29,7 +34,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
-    // updateUser(user);
+    if (user._id !== null) {
+      updateUser(user);
+    }
   }, [user]);
   useEffect(() => {
     localStorage.setItem("enemy", JSON.stringify(enemy));

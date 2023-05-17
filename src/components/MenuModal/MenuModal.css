@@ -1,0 +1,102 @@
+.menuModal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(109, 109, 109, 0.363);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.menuModal .menuLayout {
+  background-color: rgb(228, 230, 231);
+  padding: 30px 30px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+/** close */
+.closeModal button {
+  all: unset;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+/** code */
+.menuLayout .codeToFriend {
+  margin-top: 20px;
+  font-weight: 600;
+}
+.codeToFriend .code {
+  display: flex;
+  margin-top: 10px;
+  background-color: rgb(113, 163, 189);
+  padding: 15px;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+.codeToFriend .code button {
+  all: unset;
+  cursor: pointer;
+}
+
+/** score */
+.menuLayout .scoreGame {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.scoreGame .scoreGrid {
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgb(113, 163, 189);
+  padding: 20px 0;
+  border-radius: 10px;
+}
+.scoreGrid .player {
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player__score {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: var(--Score-Text);
+  min-height: 70px;
+  width: 80px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.player__score p {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--Dark-Text);
+  padding-top: 5px;
+}
+
+.player__score span {
+  margin-top: -3px;
+  color: var(--Score-Text);
+  font-size: 14px;
+}

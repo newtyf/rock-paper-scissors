@@ -1,3 +1,8 @@
+export enum ColorLabel {
+  ALERT = "#dc2e4e",
+  SUCCESS = "#2ecc71"
+}
+
 export const UseLabelModal = () => {
   const closeModal = () => {
     const modal = document.querySelector<HTMLDivElement>(".LabelModal");
@@ -9,7 +14,7 @@ export const UseLabelModal = () => {
     }
   };
 
-  const showModal = (text: string, color = "hsl(349, 71%, 52%)") => {
+  const showModal = (text: string, color: ColorLabel = ColorLabel.ALERT) => {
     const modal = document.querySelector<HTMLDivElement>(".LabelModal");
     if (modal) {
       const modalBar = document.querySelector(

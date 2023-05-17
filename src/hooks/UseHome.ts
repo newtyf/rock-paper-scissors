@@ -3,18 +3,27 @@ import { UserContext } from "../context/UserContext";
 
 import { useNavigate } from "react-router-dom";
 
-//* helpers
-// import { isRoomAvailable } from "../helpers/roomAvaildable";
-
-// import Axios from "axios";
+import axios from "axios";
 import { UseLabelModal } from "../utils/UseLabelModal";
 import { AppContext } from "../types/AppContext";
-import { User } from "../types/User";
+import { User, Room } from "../types";
+
+const createUser = async (name: string, room: string) => {
+  //* create user
+  const user = new User();
+  user.name = name;
+  user.room = room as string;
+  const resUser = await axios.post(`${import.meta.env.VITE_HOST_API}/users`, {
+    name: user.name,
+    room: user.room,
+    points: user.points,
+    pick: user.pick,
+  });
+  const dataUser = resUser.data as User;
+  return dataUser;
+};
 
 export const UseHome = () => {
-  //* socket
-  // const { socket } = useContext(UserContext);
-
   //* navigate
   const navigate = useNavigate();
 
@@ -43,7 +52,7 @@ export const UseHome = () => {
       return showModal("Debe ingresar su nick");
     }
     const user = new User({
-      id: new Date().getTime().toString(),
+      _id: new Date().getTime().toString(),
       name: formUser,
       pick: null,
       room: formRoom,
@@ -59,66 +68,47 @@ export const UseHome = () => {
   };
 
   //* play online
-  // const createRoom = async (event: MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  //   if (form.length === 0) {
-  //     return showModal("Debe ingresar su nick");
-  //   }
-  //   const { data } = await Axios.post(`${import.meta.env.VITE_HOST_API}/rooms`);
-  //   console.log(data);
-  //   const newUser = {
-  //     ...user,
-  //     name: form,
-  //     belongsRoom: data.id,
-  //     inGame: { pick: null, points: 0 },
-  //   };
-  //   const createdUser = await Axios.post(
-  //     `${import.meta.env.VITE_HOST_API}/users`,
-  //     {
-  //       user: newUser,
-  //     }
-  //   );
-  //   setUser(createdUser.data.user);
-  //   // socket.emit("join-room", createdUser.data.user);
-  //   navigate("game/friend", { replace: true });
-  // };
-  // const joinRoom = async (event: MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  //   if (form.length === 0) {
-  //     return showModal("Debe ingresar su nick");
-  //   }
-  //   inputRef.current.style.display = "block";
-  //   if (room.length === 0) {
-  //     return showModal("Debe ingresar la room id");
-  //   }
-  //   const newUser = {
-  //     ...user,
-  //     name: form,
-  //     belongsRoom: room,
-  //     inGame: { pick: null, points: 0 },
-  //   };
-  //   const createdUser = await Axios.post(
-  //     `${import.meta.env.VITE_HOST_API}/users`,
-  //     {
-  //       user: newUser,
-  //     }
-  //   );
+  const createRoom = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (formUser.length === 0) {
+      return showModal("Debe ingresar su nick");
+    }
 
-  //   if (!(await isRoomAvailable(room))) {
-  //     return showModal("la sala esta llena");
-  //   }
+    //* create room
+    const resRoom = await axios.post(`${import.meta.env.VITE_HOST_API}/rooms`);
+    const dataRoom: Room = resRoom.data as Room;
+    setRoom(dataRoom);
 
-  //   setUser(createdUser.data.user);
-  //   socket.emit("join-room", createdUser.data.user);
-  //   navigate("game/friend", { replace: true });
-  // };
+    //* create user
+    const dataUser = await createUser(formUser, dataRoom._id as string);
+    setUser(dataUser);
+    navigate("/online", { replace: true });
+  };
+  const joinRoom = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (formUser.length === 0) {
+      return showModal("Debe ingresar su nick");
+    }
+    if (formRoom.length === 0) {
+      return showModal("Debe ingresar la room id");
+    }
+    //* get room
+    const resRoom = await axios.get(`${import.meta.env.VITE_HOST_API}/rooms/${formRoom}`);
+    const dataRoom: Room = resRoom.data as Room;
+    setRoom(dataRoom);
+
+    //* create user
+    const dataUser = await createUser(formUser, formRoom);
+    setUser(dataUser);
+    navigate("/online", { replace: true });
+  };
 
   return {
     user,
     handleFormUser,
     handleFormRoom,
     playWithPc,
-    // createRoom,
-    // joinRoom,
+    createRoom,
+    joinRoom,
   };
 };
