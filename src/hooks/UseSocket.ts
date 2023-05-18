@@ -10,7 +10,7 @@ import { AppContext, Room, User } from "../types";
 import axios from "axios";
 
 const connection = new HubConnectionBuilder()
-  .withUrl("http://localhost:5093/gamehub")
+  .withUrl(import.meta.env.VITE_HOST_SOCKET)
   .configureLogging(LogLevel.Information)
   .build();
 
