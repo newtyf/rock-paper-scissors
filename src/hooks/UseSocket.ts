@@ -19,7 +19,9 @@ export const UseSocket = () => {
   const { showModal } = UseLabelModal();
 
   //* context
-  const { setEnemy, room, setRoom } = useContext(UserContext) as AppContext;
+  const { user, setUser, enemy, setEnemy, room, setRoom } = useContext(
+    UserContext
+  ) as AppContext;
 
   //* ready socket state
   const [connectionReady, setConnectionReady] = useState(false);
@@ -40,13 +42,10 @@ export const UseSocket = () => {
       start();
     }
 
-    connection.on(
-      "pickGame",
-      (name: string) => {
-        console.log(name);
-        showModal(`${name} hizo su eleccion`, ColorLabel.SUCCESS);
-      }
-    );
+    connection.on("pickGame", (name: string) => {
+      console.log(name);
+      showModal(`${name} hizo su eleccion`, ColorLabel.SUCCESS);
+    });
 
     connection.on("joinPlayer", async (id: string) => {
       const dataEnemy: User = (
@@ -74,11 +73,52 @@ export const UseSocket = () => {
       showModal(`${dataEnemy.name} ingreso a la sala`);
     });
 
+    connection.on("exitPlayer", async (message) => {
+      setEnemy(new User());
+      setRoom({ ...room, state: "WAIT", users: [user._id as string] });
+      showModal(message, ColorLabel.SUCCESS);
+    });
+
+    connection.on("resultGame", async (winer: string) => {
+      console.log(enemy);
+      if (winer === "Draw") {
+        const dataEnemy: User = (
+          await axios.get(`${import.meta.env.VITE_HOST_API}/users/${enemy._id}`)
+        ).data;
+        setEnemy({ ...enemy, pick: dataEnemy.pick });
+        setRoom({ ...room, state: "END", winner: `draw game` });
+        return;
+      }
+
+      const winner: User = JSON.parse(winer);
+      console.log(winner._id);
+      console.log(user._id);
+      if (winner._id == user._id) {
+        const dataEnemy: User = (
+          await axios.get(`${import.meta.env.VITE_HOST_API}/users/${enemy._id}`)
+        ).data;
+        setUser({ ...user, points: user.points + 1 });
+        setEnemy({ ...enemy, pick: dataEnemy.pick });
+        setRoom({ ...room, state: "END", winner: `${user.name} winner` });
+      }
+
+      if (winner._id === enemy._id) {
+        setEnemy({
+          ...enemy,
+          pick: winner.pick,
+          points: enemy.points + 1,
+        });
+        setRoom({ ...room, state: "END", winner: `${enemy.name} winner` });
+      }
+    });
+
     return () => {
       connection.off("pickGame");
       connection.off("joinPlayer");
+      connection.off("exitPlayer");
+      connection.off("resultGame");
     };
-  }, []);
+  }, [user, enemy, room]);
 
   return { connection, connectionReady };
 };

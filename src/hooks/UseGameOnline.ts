@@ -73,14 +73,15 @@ export const UseGameOnline = (): IGAME => {
 
   useEffect(() => {
     if (room.users.length === 2 && user.pick === null && enemy.pick === null) {
+      console.log("aaa");
       setRoom({ ...room, state: "START" });
     }
-  }, [room.users]);
+  }, [room.users, user.pick]);
 
   //* functions
   const pickGameSelection = (pick: TPick) => {
-    console.log(user.room);
     connection.send("PickGameOption", user.room, user.name, pick);
+    connection.send("GetWinner", room._id)
     setUser({ ...user, pick: pick });
     navigate("result");
   };
@@ -88,14 +89,19 @@ export const UseGameOnline = (): IGAME => {
     navigate("/online", { replace: true });
     setUser({ ...user, pick: null });
     setEnemy({ ...enemy, pick: null });
-    setRoom({ ...room, state: "START", winner: null });
+    setRoom({ ...room, state: "WAIT", winner: null });
   };
-  const exitGame = () => {
+  const exitGame = async () => {
     localStorage.clear();
+    //? remove user of the room
+    await axios.patch(`${import.meta.env.VITE_HOST_API}/rooms/exit`, {
+      ...user,
+    });
+    await connection.invoke("ExitGroup", user.name, user.room);
+    connection.stop().then(() => console.log("se cerro la conexion"));
     setUser(new User());
     setEnemy(new User());
     setRoom(new Room());
-    connection.stop().then(() => console.log("se cerro la conexion"));
     navigate("/", { replace: true });
   };
 

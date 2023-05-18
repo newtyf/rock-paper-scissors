@@ -26,6 +26,12 @@ const updateUser = async (user: User) => {
     name: user.name,
   });
 };
+const updateRoom = async (room: Room) => {
+  await axios.put(`${import.meta.env.VITE_HOST_API}/rooms/update/${room._id}`, {
+    state: room.state,
+    winner: room.winner,
+  });
+};
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User>(initialUserState);
@@ -43,6 +49,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   }, [enemy]);
   useEffect(() => {
     localStorage.setItem("room", JSON.stringify(room));
+    if (room._id !== null) {
+      updateRoom(room);
+    }
   }, [room]);
 
   return (

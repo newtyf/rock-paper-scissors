@@ -33,7 +33,7 @@ export const GameResult = (props: {
           <p>{enemy.name} PICKED</p>
         </div>
       </div>
-      {!!room.winner ? (
+      {room.state === "END" ? (
         <div className='Result'>
           <p>{room.winner}</p>
           <button className='btn-white' onClick={playAgain}>
