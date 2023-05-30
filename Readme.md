@@ -46,7 +46,7 @@
 - CSS Grid
 - Mobile First WorkFlow
 - [React](https://reactjs.org/) - JS library
-- [Socket-io](https://socket.io/) - WebSockets library
+- [SignalR](https://dotnet.microsoft.com/en-us/apps/aspnet/signalr) - Real time library 
 
 ### 💻 Author
 
