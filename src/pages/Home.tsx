@@ -5,6 +5,11 @@ export const Home = () => {
 
   return (
     <div className='Home'>
+      <div className="social-links">
+        <p><a href="https://github.com/newtyf/rock-paper-scissors" target="_blank" rel="noopener noreferrer">Github</a></p>
+        <span> - </span>
+        <p>Hecho por <a href="https://newtyf.com/" target="_blank" rel="noopener noreferrer">Newtyf</a></p>
+      </div>
       <h1>ROCK - PAPER - SCISSORS</h1>
       <picture style={{ margin: "20px 0" }}>
         <img src='/home/rps-unscreen.gif' width={300} alt='rps-gif' />
@@ -46,6 +51,9 @@ export const Home = () => {
           JOIN ROOM
         </button>
       </form>
+      <div className="social-links">
+        <p>Créditp al diseño a <a href="https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH" target="_blank" rel="noopener noreferrer">Frontend Mentor</a></p>
+      </div>
     </div>
   );
 };
