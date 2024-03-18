@@ -8,7 +8,7 @@ import { ColorLabel, UseLabelModal } from "../utils/UseLabelModal";
 import { UserContext } from "../context/UserContext";
 import { AppContext, Room, User } from "../types";
 import { rpsApi } from "../api/rpsApi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const connection = new HubConnectionBuilder()
   .withUrl(import.meta.env.VITE_HOST_SOCKET)
