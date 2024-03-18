@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { User } from "../types/User";
 import { Room } from "../types/Room";
 import { UserContext } from "./UserContext";
-import axios from "axios";
+import { rpsApi } from "../api/rpsApi";
 
 const initialUserState = (): User => {
   const user = localStorage.getItem("user");
@@ -20,14 +20,14 @@ const initialRoomState = (): Room => {
 };
 
 const updateUser = async (user: User) => {
-  await axios.put(`${import.meta.env.VITE_HOST_API}/users/${user._id}`, {
+  await rpsApi.put(`/users/${user._id}`, {
     pick: user.pick,
     points: user.points,
     name: user.name,
   });
 };
 const updateRoom = async (room: Room) => {
-  await axios.put(`${import.meta.env.VITE_HOST_API}/rooms/update/${room._id}`, {
+  await rpsApi.put(`/rooms/update/${room._id}`, {
     state: room.state,
     winner: room.winner,
   });

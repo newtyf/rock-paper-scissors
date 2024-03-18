@@ -3,17 +3,17 @@ import { UserContext } from "../context/UserContext";
 
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
 import { UseLabelModal } from "../utils/UseLabelModal";
 import { AppContext } from "../types/AppContext";
 import { User, Room } from "../types";
+import { rpsApi } from "../api/rpsApi";
 
 const createUser = async (name: string, room: string) => {
   //* create user
   const user = new User();
   user.name = name;
   user.room = room as string;
-  const resUser = await axios.post(`${import.meta.env.VITE_HOST_API}/users`, {
+  const resUser = await rpsApi.post(`/users`, {
     name: user.name,
     room: user.room,
     points: user.points,
@@ -75,7 +75,7 @@ export const UseHome = () => {
     }
 
     //* create room
-    const resRoom = await axios.post(`${import.meta.env.VITE_HOST_API}/rooms`);
+    const resRoom = await rpsApi.post(`/rooms`);
     const dataRoom: Room = resRoom.data as Room;
     setRoom(dataRoom);
 
@@ -93,7 +93,7 @@ export const UseHome = () => {
       return showModal("Debe ingresar la room id");
     }
     //* get room
-    const resRoom = await axios.get(`${import.meta.env.VITE_HOST_API}/rooms/${formRoom}`);
+    const resRoom = await rpsApi.get(`/rooms/${formRoom}`);
     const dataRoom: Room = resRoom.data as Room;
     setRoom(dataRoom);
 
