@@ -7,7 +7,7 @@ import { TPick, User, Room } from "../types";
 import { UseSocket } from "./UseSocket";
 import { IGAME } from "../types/IGame";
 
-import axios from "axios";
+import { rpsApi } from "../api/rpsApi";
 
 export const UseGameOnline = (): IGAME => {
   //* navigate
@@ -24,7 +24,7 @@ export const UseGameOnline = (): IGAME => {
   //* join to group and then get data of enemy if exists getDataEnemy => inside JoinGroup
   const getDataEnemy = async (roomId: string) => {
     const dataRoom: Room = (
-      await axios.get(`${import.meta.env.VITE_HOST_API}/rooms/${roomId}`)
+      await rpsApi.get(`/rooms/${roomId}`)
     ).data;
 
     const enemyId = dataRoom.users.find((item) => item !== user._id);
@@ -33,7 +33,7 @@ export const UseGameOnline = (): IGAME => {
     }
 
     const dataEnemy: User = (
-      await axios.get(`${import.meta.env.VITE_HOST_API}/users/${enemyId}`)
+      await rpsApi.get(`/users/${enemyId}`)
     ).data;
 
     setEnemy(
@@ -52,12 +52,12 @@ export const UseGameOnline = (): IGAME => {
     //   connection.send("JoinGroup", user._id, user.room);
     //   return;
     // }
-    await axios.patch(`${import.meta.env.VITE_HOST_API}/rooms/join`, {
+    await rpsApi.patch(`/rooms/join`, {
       ...user,
     });
 
     const dataRoom: Room = (
-      await axios.get(`${import.meta.env.VITE_HOST_API}/rooms/${room._id}`)
+      await rpsApi.get(`/rooms/${room._id}`)
     ).data;
 
     getDataEnemy(dataRoom._id as string);
@@ -73,7 +73,6 @@ export const UseGameOnline = (): IGAME => {
 
   useEffect(() => {
     if (room.users.length === 2 && user.pick === null && enemy.pick === null) {
-      console.log("aaa");
       setRoom({ ...room, state: "START" });
     }
   }, [room.users, user.pick]);
@@ -86,6 +85,7 @@ export const UseGameOnline = (): IGAME => {
     navigate("result");
   };
   const playAgain = () => {
+    connection.send("PlayAgain", user.room, user.name);
     navigate("/online", { replace: true });
     setUser({ ...user, pick: null });
     setEnemy({ ...enemy, pick: null });
@@ -94,7 +94,7 @@ export const UseGameOnline = (): IGAME => {
   const exitGame = async () => {
     localStorage.clear();
     //? remove user of the room
-    await axios.patch(`${import.meta.env.VITE_HOST_API}/rooms/exit`, {
+    await rpsApi.patch(`/rooms/exit`, {
       ...user,
     });
     await connection.invoke("ExitGroup", user.name, user.room);
