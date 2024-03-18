@@ -7,7 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { ColorLabel, UseLabelModal } from "../utils/UseLabelModal";
 import { UserContext } from "../context/UserContext";
 import { AppContext, Room, User } from "../types";
-import axios from "axios";
+import { rpsApi } from "../api/rpsApi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const connection = new HubConnectionBuilder()
   .withUrl(import.meta.env.VITE_HOST_SOCKET)
@@ -17,6 +18,8 @@ const connection = new HubConnectionBuilder()
 export const UseSocket = () => {
   //* modal
   const { showModal } = UseLabelModal();
+  const navigate = useNavigate()
+  // let location = useLocation();
 
   //* context
   const { user, setUser, enemy, setEnemy, room, setRoom } = useContext(
@@ -43,13 +46,20 @@ export const UseSocket = () => {
     }
 
     connection.on("pickGame", (name: string) => {
-      console.log(name);
       showModal(`${name} hizo su eleccion`, ColorLabel.SUCCESS);
+    });
+
+    connection.on("playAgain", (name: string) => {
+      showModal(`${name} quiere jugar de nuevo`, ColorLabel.SUCCESS);
+      navigate("/online", { replace: true });
+      setUser({ ...user, pick: null });
+      setEnemy({ ...enemy, pick: null });
+      setRoom({ ...room, state: "WAIT", winner: null });
     });
 
     connection.on("joinPlayer", async (id: string) => {
       const dataEnemy: User = (
-        await axios.get(`${import.meta.env.VITE_HOST_API}/users/${id}`)
+        await rpsApi.get(`/users/${id}`)
       ).data;
 
       setEnemy(
@@ -63,8 +73,8 @@ export const UseSocket = () => {
       );
 
       const dataRoom: Room = (
-        await axios.get(
-          `${import.meta.env.VITE_HOST_API}/rooms/${
+        await rpsApi.get(
+          `/rooms/${
             (dataEnemy.room as Room)._id
           }`
         )
@@ -77,13 +87,17 @@ export const UseSocket = () => {
       setEnemy(new User());
       setRoom({ ...room, state: "WAIT", users: [user._id as string] });
       showModal(message, ColorLabel.SUCCESS);
+
+      console.log(location.pathname.split("/").at(-1))
+      if (location.pathname.split("/").at(-1) === 'result') {
+        navigate("/online")
+      }
     });
 
     connection.on("resultGame", async (winer: string) => {
-      console.log(enemy);
       if (winer === "Draw") {
         const dataEnemy: User = (
-          await axios.get(`${import.meta.env.VITE_HOST_API}/users/${enemy._id}`)
+          await rpsApi.get(`/users/${enemy._id}`)
         ).data;
         setEnemy({ ...enemy, pick: dataEnemy.pick });
         setRoom({ ...room, state: "END", winner: `draw game` });
@@ -95,7 +109,7 @@ export const UseSocket = () => {
       console.log(user._id);
       if (winner._id == user._id) {
         const dataEnemy: User = (
-          await axios.get(`${import.meta.env.VITE_HOST_API}/users/${enemy._id}`)
+          await rpsApi.get(`/users/${enemy._id}`)
         ).data;
         setUser({ ...user, points: user.points + 1 });
         setEnemy({ ...enemy, pick: dataEnemy.pick });
